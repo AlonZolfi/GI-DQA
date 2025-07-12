@@ -2,105 +2,280 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ICML Poster - gi-dqa</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GI-DQA – Gradient Inversion of Multimodal Models</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: #f9f9f9;
-      color: #333;
+    :root {
+      --primary: #0056b3;
+      --primary-dark: #00479a;
+      --bg: #f9f9f9;
+      --text: #333;
+      --radius: 10px;
+      --shadow: 0 2px 12px rgba(0, 0, 0, .06);
     }
-    header {
-      background: #0056b3;
-      color: white;
-      padding: 2rem;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header.hero {
+      background: var(--primary);
+      color: #fff;
+      padding: 4rem 1rem 5rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header.hero::after {
+      content: "";
+      position: absolute;
+      bottom: -60px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: var(--bg);
+      transform: skewY(-4deg);
+      transform-origin: 0 0;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .hero .subtitle {
+      font-size: 1rem;
+      opacity: .9;
+      margin-bottom: 1.5rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: .75rem 1.5rem;
+      background: #fff;
+      color: var(--primary);
+      font-weight: 600;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .cta:hover {
+      background: var(--primary-dark);
+      color: #fff;
+    }
+    nav {
+      background: #fff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: .5rem 1rem;
+      list-style: none;
+      gap: 1rem;
+      overflow-x: auto;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      padding: .5rem 0;
+    }
+    nav a:hover {
+      color: var(--primary);
     }
     main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
     }
-    h1, h2 {
-      margin-top: 0;
+    section {
+      margin-bottom: 3.5rem;
     }
-    a {
-      color: #0056b3;
+    section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--primary);
+      padding-left: .5rem;
+    }
+    .two-col {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      align-items: start;
+    }
+    figure {
+      margin: 0;
+    }
+    figure img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    figure figcaption {
+      font-size: .875rem;
+      text-align: center;
+      margin-top: .5rem;
+      opacity: .8;
+    }
+    ul, ol {
+      padding-left: 1.25rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .95rem;
+      box-shadow: var(--shadow);
+    }
+    thead {
+      background: var(--primary);
+      color: #fff;
+    }
+    th, td {
+      padding: .6rem .8rem;
+      text-align: left;
+      border-bottom: 1px solid #eaeaea;
+    }
+    tbody tr:nth-child(even) {
+      background: #fcfcfc;
+    }
+    .resource-links {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem 1.5rem;
+    }
+    .resource-links a {
+      color: var(--primary);
       text-decoration: none;
+      font-weight: 600;
     }
-    a:hover {
+    .resource-links a:hover {
       text-decoration: underline;
     }
     footer {
       text-align: center;
-      margin: 4rem 0 1rem;
-      color: #777;
-    }
-    /* Add poster-specific styles */
-    .poster-section {
-      margin: 2rem 0;
-    }
-    .results-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1rem;
-    }
-    .result-card {
-      border: 1px solid #eee;
-      padding: 1rem;
-      border-radius: 4px;
+      padding: 2rem 1rem;
+      font-size: .9rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
+  <header class="hero">
+    <h1>GI-DQA: Gradient Inversion of Document QA</h1>
+    <p class="subtitle">ICML 2025 · Ben-Gurion University & Fujitsu Research</p>
+    <a class="cta" href="#abstract">Read the Abstract ↓</a>
+  </header>
 
-<header>
-  <h1>gi-dqa: Graph-based Interpretable Document Question Answering</h1>
-  <p>ICML 2025 Poster Presentation by Alon Zolfi</p>
-</header>
-
-<main>
-  <h2>Abstract</h2>
-  <p>Brief description of your research and findings...</p>
-
-  <div class="poster-section">
-    <h2>Key Contributions</h2>
+  <nav>
     <ul>
-      <li>Contribution 1</li>
-      <li>Contribution 2</li>
-      <li>Contribution 3</li>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#contributions">Contributions</a></li>
+      <li><a href="#method">Method</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#defense">Defense</a></li>
+      <li><a href="#resources">Resources</a></li>
     </ul>
-  </div>
+  </nav>
 
-  <div class="poster-section">
-    <h2>Methodology</h2>
-    <p>Description of your approach...</p>
-    <!-- Add an image of your model architecture -->
-  </div>
+  <main>
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <p>Federated Learning (FL) enables collaborative training without exposing raw data, yet remains vulnerable to <strong>gradient inversion</strong> attacks that recover private inputs from shared gradients. We present <strong>GI-DQA</strong>, the <em>first</em> attack that successfully reconstructs sensitive <em>document question-answering</em> inputs by combining optimization-based image recovery with analytic extraction of question–answer pairs. GI-DQA recovers &gt;70 % of document words on state-of-the-art multimodal models, revealing new privacy risks and motivating stronger defenses.</p>
+    </section>
 
-  <div class="poster-section">
-    <h2>Results</h2>
-    <div class="results-grid">
-      <!-- Add result cards with charts/tables -->
-    </div>
-  </div>
+    <section id="contributions">
+      <h2>Key Contributions</h2>
+      <ul>
+        <li>Introduces GI-DQA — the first gradient inversion attack targeting multimodal Document QA models.</li>
+        <li>Hybrid strategy: visual pixel optimization <em>+</em> analytic question–answer reconstruction.</li>
+        <li>Novel loss with gradient matching (MSE + cosine) and text-aware priors (Laplacian, Gaussian, Spatial & Channel TV).</li>
+        <li>Comprehensive evaluation on Donut-Base and LayoutLMv3-Base using the privacy-aware PFL-DocVQA dataset.</li>
+        <li>Proposes <strong>Safe Template</strong> — an input-level defense that drops attack success from 70 % to &lt;1 % without hurting utility.</li>
+      </ul>
+    </section>
 
-  <div class="poster-section">
-    <h2>Resources</h2>
-    <p><a href="https://github.com/AlonZolfi/gi-dqa" target="_blank">GitHub Repository</a></p>
-    <p><a href="paper.pdf" target="_blank">Download Paper</a></p>
-    <p><a href="poster.pdf" target="_blank">Download Poster</a></p>
-  </div>
-</main>
+    <section id="method">
+      <h2>Method Overview</h2>
+      <div class="two-col">
+        <div>
+          <h3>Hybrid Reconstruction Pipeline</h3>
+          <p>GI-DQA takes leaked gradients (<code>∇θ</code>), public document templates, and model weights as input. It:</p>
+          <ol>
+            <li>Extracts the exact <strong>question &amp; answer tokens</strong> analytically.</li>
+            <li>Optimizes document pixels to <em>match</em> client gradients while respecting visual priors.</li>
+            <li>Iteratively refines until gradients align and priors converge.</li>
+          </ol>
+          <h4>Loss Components</h4>
+          <ul>
+            <li><strong>Gradient Match</strong> = MSE + Cosine Similarity (layer-wise).</li>
+            <li><strong>Laplacian Text Prior</strong> (R<sub>txt</sub>) — sharpens word edges.</li>
+            <li><strong>Gaussian Prior</strong> (R<sub>gau</sub>) — removes high-frequency noise.</li>
+            <li><strong>Total Variation</strong> (R<sub>TV-S</sub>, R<sub>TV-C</sub>) — enforces spatial & channel smoothness.</li>
+            <li><strong>Exponential Scheduler</strong> φ(t) — high prior weight early, decays over iterations.</li>
+          </ul>
+        </div>
+        <figure>
+          <img src="img/architecture-placeholder.svg" alt="GI-DQA reconstruction architecture diagram" />
+          <figcaption>Attack loop — gradients guide pixel updates with auxiliary priors.</figcaption>
+        </figure>
+      </div>
+    </section>
 
-<footer>
-  &copy; 2025 Alon Zolfi · Contact: your.email@example.com
-</footer>
+    <section id="results">
+      <h2>Results</h2>
+      <p>GI-DQA dramatically outperforms prior inversion methods on multimodal models.</p>
+      <table>
+        <thead>
+          <tr><th>Model</th><th>PSNR ↑</th><th>MSE ↓</th><th>Exact Match ↑</th><th>Fuzz Ratio ↑</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Donut-Base</td><td>24.2</td><td>60.4</td><td>70.1 %</td><td>0.91</td></tr>
+          <tr><td>LayoutLMv3-Base</td><td>22.7</td><td>72.5</td><td>82.1 %</td><td>0.68</td></tr>
+        </tbody>
+      </table>
+      <br/>
+      <figure>
+        <img src="img/reconstruction-example-placeholder.png" alt="Zoomed reconstruction examples" />
+        <figcaption>Recovered private fields (names, IDs) using GI-DQA vs. prior attacks.</figcaption>
+      </figure>
+    </section>
 
+    <section id="defense">
+      <h2>Safe Template Defense</h2>
+      <p>Organizations can embed tiny, human-imperceptible perturbations into public templates. Our <strong>Safe Template</strong> defense maximizes gradient divergence, blocking GI-DQA without changing document utility.</p>
+      <ul>
+        <li><strong>Random Noise</strong>: Works with ϵ &gt; 32/255.</li>
+        <li><strong>PGD Perturbations</strong>: Comparable protection at ϵ &gt; 8/255.</li>
+        <li>No modifications to model or training loop; applied offline.</li>
+        <li>Reduces attack success to < 1 % on Donut-Base.</li>
+      </ul>
+    </section>
+
+    <section id="resources">
+      <h2>Resources</h2>
+      <ul class="resource-links">
+        <li><a href="https://github.com/AlonZolfi/gi-dqa" target="_blank">GitHub Repository</a></li>
+        <li><a href="paper.pdf" target="_blank">Read the Paper (PDF)</a></li>
+        <li><a href="poster.pdf" target="_blank">Download Poster</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 GI-DQA Team · Contact: <a href="mailto:omribenh@post.bgu.ac.il">omribenh@post.bgu.ac.il</a>
+  </footer>
 </body>
 </html>
