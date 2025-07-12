@@ -34,10 +34,8 @@ const server = http.createServer((req, res) => {
     if (err) {
       if (err.code === 'ENOENT') {
         // Page not found
-        fs.readFile(path.join(__dirname, 'docs', '404.html'), (err, content) => {
-          res.writeHead(404, { 'Content-Type': 'text/html' });
-          res.end(content, 'utf-8');
-        });
+        res.writeHead(404, { 'Content-Type': 'text/html' });
+        res.end('<html><head><title>404 Not Found</title></head><body><h1>404 Not Found</h1><p>The requested resource could not be found.</p><a href="/">Return to Homepage</a></body></html>', 'utf-8');
       } else {
         // Server error
         res.writeHead(500);
