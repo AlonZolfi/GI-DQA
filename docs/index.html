@@ -2,280 +2,310 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GI-DQA – Gradient Inversion of Multimodal Models</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GI-DQA - ICML 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --primary: #0056b3;
-      --primary-dark: #00479a;
-      --bg: #f9f9f9;
-      --text: #333;
-      --radius: 10px;
-      --shadow: 0 2px 12px rgba(0, 0, 0, .06);
+      --primary: #0066cc;
+      --secondary: #f5f5f7;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --spacing: clamp(1rem, 5vw, 3rem);
     }
+    
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+    
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fff;
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
     }
-    header.hero {
-      background: var(--primary);
-      color: #fff;
-      padding: 4rem 1rem 5rem;
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing);
+    }
+    
+    /* Hero section */
+    .hero {
+      background: var(--secondary);
+      padding: 8rem var(--spacing) 4rem;
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
-    header.hero::after {
-      content: "";
-      position: absolute;
-      bottom: -60px;
-      left: 0;
-      width: 100%;
-      height: 120px;
-      background: var(--bg);
-      transform: skewY(-4deg);
-      transform-origin: 0 0;
-    }
+    
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      margin-bottom: .75rem;
-    }
-    .hero .subtitle {
-      font-size: 1rem;
-      opacity: .9;
-      margin-bottom: 1.5rem;
-    }
-    .cta {
-      display: inline-block;
-      padding: .75rem 1.5rem;
-      background: #fff;
-      color: var(--primary);
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 600;
-      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 2rem;
+      font-weight: 500;
       text-decoration: none;
-      transition: background .2s, color .2s;
+      transition: all 0.2s;
     }
-    .cta:hover {
-      background: var(--primary-dark);
-      color: #fff;
+    
+    .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
     }
+    
+    /* Navigation */
     nav {
-      background: #fff;
-      box-shadow: var(--shadow);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(20px);
       position: sticky;
       top: 0;
-      z-index: 999;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+    
     nav ul {
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: .5rem 1rem;
+      justify-content: center;
       list-style: none;
-      gap: 1rem;
-      overflow-x: auto;
+      padding: 1rem 0;
     }
+    
+    nav li {
+      margin: 0 1rem;
+    }
+    
     nav a {
-      text-decoration: none;
       color: var(--text);
-      padding: .5rem 0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
     }
+    
     nav a:hover {
       color: var(--primary);
     }
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
+    
+    /* Sections */
     section {
-      margin-bottom: 3.5rem;
+      padding: 5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
+    
     section h2 {
-      font-size: 1.75rem;
-      margin-bottom: 1rem;
-      border-left: 4px solid var(--primary);
-      padding-left: .5rem;
-    }
-    .two-col {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      align-items: start;
-    }
-    figure {
-      margin: 0;
-    }
-    figure img {
-      width: 100%;
-      height: auto;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    figure figcaption {
-      font-size: .875rem;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
       text-align: center;
-      margin-top: .5rem;
-      opacity: .8;
+      letter-spacing: -0.02em;
     }
-    ul, ol {
-      padding-left: 1.25rem;
+    
+    /* Feature grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .95rem;
-      box-shadow: var(--shadow);
+    
+    .feature-card {
+      background: var(--secondary);
+      border-radius: 1rem;
+      padding: 2rem;
+      transition: transform 0.3s;
     }
-    thead {
-      background: var(--primary);
-      color: #fff;
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
     }
-    th, td {
-      padding: .6rem .8rem;
-      text-align: left;
-      border-bottom: 1px solid #eaeaea;
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
     }
-    tbody tr:nth-child(even) {
-      background: #fcfcfc;
-    }
-    .resource-links {
-      list-style: none;
+    
+    /* Results section */
+    .results-container {
       display: flex;
-      flex-wrap: wrap;
-      gap: .75rem 1.5rem;
+      flex-direction: column;
+      align-items: center;
     }
-    .resource-links a {
+    
+    .results-image {
+      max-width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin: 2rem 0;
+    }
+    
+    /* Resources section */
+    .resources {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--secondary);
+      padding: 1rem 1.5rem;
+      border-radius: 2rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    .resource-link:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--secondary);
+      padding: 3rem var(--spacing);
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    
+    footer a {
       color: var(--primary);
       text-decoration: none;
-      font-weight: 600;
     }
-    .resource-links a:hover {
-      text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      font-size: .9rem;
-      color: #666;
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-wrap: wrap;
+      }
+      
+      nav li {
+        margin: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <h1>GI-DQA: Gradient Inversion of Document QA</h1>
-    <p class="subtitle">ICML 2025 · Ben-Gurion University & Fujitsu Research</p>
-    <a class="cta" href="#abstract">Read the Abstract ↓</a>
-  </header>
-
+  <div class="hero">
+    <div class="container">
+      <h1>GI-DQA</h1>
+      <p>Gradient Inversion of Document Question Answering</p>
+      <a href="#abstract" class="cta-button">Learn More</a>
+    </div>
+  </div>
+  
   <nav>
     <ul>
       <li><a href="#abstract">Abstract</a></li>
       <li><a href="#contributions">Contributions</a></li>
       <li><a href="#method">Method</a></li>
       <li><a href="#results">Results</a></li>
-      <li><a href="#defense">Defense</a></li>
       <li><a href="#resources">Resources</a></li>
     </ul>
   </nav>
-
-  <main>
-    <section id="abstract">
+  
+  <section id="abstract">
+    <div class="container">
       <h2>Abstract</h2>
-      <p>Federated Learning (FL) enables collaborative training without exposing raw data, yet remains vulnerable to <strong>gradient inversion</strong> attacks that recover private inputs from shared gradients. We present <strong>GI-DQA</strong>, the <em>first</em> attack that successfully reconstructs sensitive <em>document question-answering</em> inputs by combining optimization-based image recovery with analytic extraction of question–answer pairs. GI-DQA recovers &gt;70 % of document words on state-of-the-art multimodal models, revealing new privacy risks and motivating stronger defenses.</p>
-    </section>
-
-    <section id="contributions">
+      <p>Federated Learning (FL) enables collaborative training without exposing raw data, yet remains vulnerable to <strong>gradient inversion</strong> attacks that recover private inputs from shared gradients. We present <strong>GI-DQA</strong>, the <em>first</em> attack that successfully reconstructs sensitive <em>document question-answering</em> inputs by combining optimization-based image recovery with analytic extraction of question–answer pairs.</p>
+    </div>
+  </section>
+  
+  <section id="contributions">
+    <div class="container">
       <h2>Key Contributions</h2>
-      <ul>
-        <li>Introduces GI-DQA — the first gradient inversion attack targeting multimodal Document QA models.</li>
-        <li>Hybrid strategy: visual pixel optimization <em>+</em> analytic question–answer reconstruction.</li>
-        <li>Novel loss with gradient matching (MSE + cosine) and text-aware priors (Laplacian, Gaussian, Spatial & Channel TV).</li>
-        <li>Comprehensive evaluation on Donut-Base and LayoutLMv3-Base using the privacy-aware PFL-DocVQA dataset.</li>
-        <li>Proposes <strong>Safe Template</strong> — an input-level defense that drops attack success from 70 % to &lt;1 % without hurting utility.</li>
-      </ul>
-    </section>
-
-    <section id="method">
-      <h2>Method Overview</h2>
-      <div class="two-col">
-        <div>
-          <h3>Hybrid Reconstruction Pipeline</h3>
-          <p>GI-DQA takes leaked gradients (<code>∇θ</code>), public document templates, and model weights as input. It:</p>
-          <ol>
-            <li>Extracts the exact <strong>question &amp; answer tokens</strong> analytically.</li>
-            <li>Optimizes document pixels to <em>match</em> client gradients while respecting visual priors.</li>
-            <li>Iteratively refines until gradients align and priors converge.</li>
-          </ol>
-          <h4>Loss Components</h4>
-          <ul>
-            <li><strong>Gradient Match</strong> = MSE + Cosine Similarity (layer-wise).</li>
-            <li><strong>Laplacian Text Prior</strong> (R<sub>txt</sub>) — sharpens word edges.</li>
-            <li><strong>Gaussian Prior</strong> (R<sub>gau</sub>) — removes high-frequency noise.</li>
-            <li><strong>Total Variation</strong> (R<sub>TV-S</sub>, R<sub>TV-C</sub>) — enforces spatial & channel smoothness.</li>
-            <li><strong>Exponential Scheduler</strong> φ(t) — high prior weight early, decays over iterations.</li>
-          </ul>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Novel Attack</h3>
+          <p>First gradient inversion attack targeting multimodal Document QA models.</p>
         </div>
-        <figure>
-          <img src="img/architecture-placeholder.svg" alt="GI-DQA reconstruction architecture diagram" />
-          <figcaption>Attack loop — gradients guide pixel updates with auxiliary priors.</figcaption>
-        </figure>
+        <div class="feature-card">
+          <h3>Hybrid Strategy</h3>
+          <p>Visual pixel optimization + analytic question–answer reconstruction.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Comprehensive Evaluation</h3>
+          <p>Tested on Donut-Base and LayoutLMv3-Base using the privacy-aware PFL-DocVQA dataset.</p>
+        </div>
       </div>
-    </section>
-
-    <section id="results">
+    </div>
+  </section>
+  
+  <section id="method">
+    <div class="container">
+      <h2>Method</h2>
+      <img src="img/architecture.png" alt="GI-DQA Architecture" style="max-width: 100%; border-radius: 1rem; margin: 2rem 0;">
+      <p>GI-DQA takes leaked gradients (∇θ), public document templates, and model weights as input. It extracts the exact question & answer tokens analytically, then optimizes document pixels to match client gradients while respecting visual priors.</p>
+    </div>
+  </section>
+  
+  <section id="results">
+    <div class="container">
       <h2>Results</h2>
-      <p>GI-DQA dramatically outperforms prior inversion methods on multimodal models.</p>
-      <table>
-        <thead>
-          <tr><th>Model</th><th>PSNR ↑</th><th>MSE ↓</th><th>Exact Match ↑</th><th>Fuzz Ratio ↑</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Donut-Base</td><td>24.2</td><td>60.4</td><td>70.1 %</td><td>0.91</td></tr>
-          <tr><td>LayoutLMv3-Base</td><td>22.7</td><td>72.5</td><td>82.1 %</td><td>0.68</td></tr>
-        </tbody>
-      </table>
-      <br/>
-      <figure>
-        <img src="img/reconstruction-example-placeholder.png" alt="Zoomed reconstruction examples" />
-        <figcaption>Recovered private fields (names, IDs) using GI-DQA vs. prior attacks.</figcaption>
-      </figure>
-    </section>
-
-    <section id="defense">
-      <h2>Safe Template Defense</h2>
-      <p>Organizations can embed tiny, human-imperceptible perturbations into public templates. Our <strong>Safe Template</strong> defense maximizes gradient divergence, blocking GI-DQA without changing document utility.</p>
-      <ul>
-        <li><strong>Random Noise</strong>: Works with ϵ &gt; 32/255.</li>
-        <li><strong>PGD Perturbations</strong>: Comparable protection at ϵ &gt; 8/255.</li>
-        <li>No modifications to model or training loop; applied offline.</li>
-        <li>Reduces attack success to < 1 % on Donut-Base.</li>
-      </ul>
-    </section>
-
-    <section id="resources">
+      <div class="results-container">
+        <p>GI-DQA dramatically outperforms prior inversion methods on multimodal models.</p>
+        <img src="img/results.png" alt="Results Comparison" class="results-image">
+        <p>Recovered private fields (names, IDs) using GI-DQA vs. prior attacks.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="resources">
+    <div class="container">
       <h2>Resources</h2>
-      <ul class="resource-links">
-        <li><a href="https://github.com/AlonZolfi/gi-dqa" target="_blank">GitHub Repository</a></li>
-        <li><a href="paper.pdf" target="_blank">Read the Paper (PDF)</a></li>
-        <li><a href="poster.pdf" target="_blank">Download Poster</a></li>
-      </ul>
-    </section>
-  </main>
-
+      <div class="resources">
+        <a href="https://github.com/AlonZolfi/gi-dqa" class="resource-link" target="_blank">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub Repository
+        </a>
+        <a href="paper.pdf" class="resource-link" target="_blank">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1v5h5v10H6V3h7z"/>
+          </svg>
+          Read the Paper
+        </a>
+        <a href="poster.pdf" class="resource-link" target="_blank">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+            <path d="M7 12h10v2H7z"/>
+            <path d="M7 7h10v2H7z"/>
+            <path d="M7 17h7v2H7z"/>
+          </svg>
+          Download Poster
+        </a>
+      </div>
+    </div>
+  </section>
+  
   <footer>
-    © 2025 GI-DQA Team · Contact: <a href="mailto:omribenh@post.bgu.ac.il">omribenh@post.bgu.ac.il</a>
+    <div class="container">
+      <p>&copy; 2025 GI-DQA Team · <a href="mailto:omribenh@post.bgu.ac.il">omribenh@post.bgu.ac.il</a></p>
+    </div>
   </footer>
 </body>
 </html>
