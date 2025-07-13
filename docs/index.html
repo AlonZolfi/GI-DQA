@@ -2,310 +2,580 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GI-DQA - ICML 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GI-DQA – ICML 2025</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Styles -->
   <style>
     :root {
       --primary: #0066cc;
-      --secondary: #f5f5f7;
+      --background: #f7f9fc;
       --text: #1d1d1f;
-      --text-secondary: #86868b;
-      --spacing: clamp(1rem, 5vw, 3rem);
+      --text-muted: #6b7280;
+      --spacing: 1.5rem;
+      --card-shadow: rgba(0, 0, 0, 0.08);
     }
-    
-    * {
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
-    
-    body {
-      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #fff;
-      color: var(--text);
-      line-height: 1.5;
-    }
-    
-    .container {
+
+    /* Header styles */
+    .header-container {
+      background-color: var(--background); /* Match site background */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 var(--spacing);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle divider */
     }
     
-    /* Hero section */
-    .hero {
-      background: var(--secondary);
-      padding: 8rem var(--spacing) 4rem;
+    /* Base logo styles */
+    .logos img {
+      margin: 0 15px;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    
+    /* Specific logo sizes */
+    .fujitsu-logo {
+      height: 100px; /* Larger Fujitsu logo */
+    }
+    
+    .icml-logo {
+      height: 70px; /* Normal ICML logo */
+    }
+    
+    .title-container {
       text-align: center;
+      flex-grow: 1;
+      padding: 0 20px;
     }
     
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 600;
+    .title-container h1 {
+      font-size: 28px; /* Slightly larger title */
+      font-weight: bold;
+      margin: 0;
+      color: var(--text); /* Changed back to black */
+    }
+    
+    .title-container p {
+      margin: 10px 0 0;
+      font-size: 15px;
+      color: var(--text);
+    }
+    
+    .logos {
+      display: flex;
+      align-items: center;
+    }
+
+    header, section, footer {
+      padding: var(--spacing);
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section {
+      padding-top: calc(var(--spacing) + 2rem);
+      padding-bottom: calc(var(--spacing) + 1rem);
+    }
+
+    /* Section dividers */
+    section:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 3rem;
       margin-bottom: 1rem;
-      letter-spacing: -0.02em;
     }
-    
-    .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto 2rem;
+
+    h1, h2, h3 {
+      margin-bottom: 1rem;
+      text-align: center; /* Center all headings */
     }
-    
-    .cta-button {
+
+    .btn {
       display: inline-block;
       background: var(--primary);
       color: white;
-      padding: 0.8rem 2rem;
+      text-decoration: none;
+      padding: 0.75rem 2rem;
       border-radius: 2rem;
       font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s;
+      transition: transform 0.3s ease;
     }
-    
-    .cta-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px var(--card-shadow);
     }
-    
-    /* Navigation */
-    nav {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(20px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    
-    nav ul {
-      display: flex;
-      justify-content: center;
-      list-style: none;
-      padding: 1rem 0;
-    }
-    
-    nav li {
-      margin: 0 1rem;
-    }
-    
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    
-    nav a:hover {
-      color: var(--primary);
-    }
-    
-    /* Sections */
-    section {
-      padding: 5rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
-    
-    section h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-bottom: 2rem;
-      text-align: center;
-      letter-spacing: -0.02em;
-    }
-    
-    /* Feature grid */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 3rem 0;
-    }
-    
-    .feature-card {
-      background: var(--secondary);
-      border-radius: 1rem;
+
+    .card {
+      background: white;
       padding: 2rem;
-      transition: transform 0.3s;
-    }
-    
-    .feature-card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
-    }
-    
-    /* Results section */
-    .results-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .results-image {
-      max-width: 100%;
       border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      margin: 2rem 0;
+      box-shadow: 0 6px 12px var(--card-shadow);
+      margin-bottom: var(--spacing);
     }
-    
-    /* Resources section */
-    .resources {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-top: 2rem;
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing);
     }
-    
-    .resource-link {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--secondary);
-      padding: 1rem 1.5rem;
-      border-radius: 2rem;
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      transition: all 0.2s;
+
+    .features-grid .card:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
     }
-    
-    .resource-link:hover {
-      background: var(--primary);
-      color: white;
-      transform: scale(1.05);
+
+    /* Consistent heading colors */
+    .features-grid .card h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
     }
-    
-    /* Footer */
+
+    img {
+      max-width: 100%;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px var(--card-shadow);
+    }
+
     footer {
-      background: var(--secondary);
-      padding: 3rem var(--spacing);
       text-align: center;
-      color: var(--text-secondary);
+      color: var(--text-muted);
+      padding-top: 2rem;
+      border-top: 1px solid #eaeaea;
     }
-    
+
     footer a {
       color: var(--primary);
       text-decoration: none;
     }
-    
-    /* Responsive */
+
+    .nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .nav-buttons .btn {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .nav-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-buttons .btn {
+        width: 80%;
+      }
+    }
+
+    /* Sticky Navigation */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      padding: 0.75rem 0;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing);
+    }
+
+    .nav-btn {
+      display: inline-block;
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.5rem 1.25rem;
+      margin: 0 0.5rem;
+      font-weight: 500;
+      border-radius: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      background-color: rgba(0, 102, 204, 0.1);
+      color: var(--primary);
+    }
+
+    .nav-btn.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* Adjust section padding to account for sticky nav */
+    section {
+      padding-top: calc(var(--spacing) + 2rem);
+      margin-top: -2rem;
+    }
+
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      nav ul {
-        flex-wrap: wrap;
+      .nav-container {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 0.25rem;
+      }
+
+      .nav-btn {
+        white-space: nowrap;
       }
       
-      nav li {
-        margin: 0.5rem;
+      .header-container {
+        flex-direction: column;
+        text-align: center;
       }
+      
+      .logos {
+        justify-content: center;
+        margin-top: 10px;
+      }
+      
+      .fujitsu-logo {
+        height: 70px; /* Responsive Fujitsu logo */
+      }
+      
+      .icml-logo {
+        height: 50px; /* Responsive ICML logo */
+      }
+    }
+
+    /* Pipeline Grid */
+    .pipeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing);
+      margin-top: 1.5rem;
+    }
+    
+    .pipeline-grid .card {
+      margin-bottom: 0;
+    }
+    
+    .pipeline-grid .card h3 {
+      font-size: 1.2rem;
+      color: var(--primary);
+    }
+    
+    .pipeline-grid .card ul {
+      padding-left: 1.2rem;
+    }
+    
+    .pipeline-grid .card li {
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    /* For very small screens, ensure cards stack properly */
+    @media (max-width: 500px) {
+      .pipeline-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Resource Cards */
+    .resource-card {
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      color: var(--text);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .resource-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .resource-card:hover .resource-title {
+      color: white;
+    }
+    
+    .resource-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #4da9ff, #0077cc);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+    
+    .resource-card:hover::before {
+      opacity: 1;
+    }
+    
+    .resource-title {
+      position: relative;
+      z-index: 1;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid transparent;
+    }
+    
+    .resource-card:hover .resource-title {
+      border-bottom-color: rgba(255, 255, 255, 0.5);
+      padding-bottom: 0.75rem;
+    }
+    
+    /* Adjust the features grid for resources to make cards more compact */
+    #resources .features-grid {
+      gap: 1rem;
+    }
+    
+    #resources .card {
+      padding: 1.5rem;
+    }
+
+    /* Fix for Resources section height */
+    #resources {
+      min-height: 100px; /* Ensure minimum height for proper scrolling */
+      padding-bottom: 100px; /* Add extra padding at bottom */
+    }
+
+    /* Adjust the navigation highlighting threshold */
+    .nav-btn.active {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    /* Improve scroll detection for navigation */
+    section {
+      scroll-margin-top: 80px; /* Adjust scroll position for section headers */
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <div class="container">
-      <h1>GI-DQA</h1>
-      <p>Gradient Inversion of Document Question Answering</p>
-      <a href="#abstract" class="cta-button">Learn More</a>
+  <!-- New Header -->
+  <header class="header-container">
+    <div class="logos">
+      <img src="../Images/Fujitsu_logo.png" alt="Fujitsu Logo" class="fujitsu-logo">
     </div>
-  </div>
-  
-  <nav>
-    <ul>
-      <li><a href="#abstract">Abstract</a></li>
-      <li><a href="#contributions">Contributions</a></li>
-      <li><a href="#method">Method</a></li>
-      <li><a href="#results">Results</a></li>
-      <li><a href="#resources">Resources</a></li>
-    </ul>
+    <div class="title-container">
+      <h1>Gradient Inversion of Multimodal Models</h1>
+      <p>
+        Omri Ben Hemo<sup><sup>*</sup>1</sup>, Alon Zolfi<sup><sup>*</sup>1</sup>, Oryan Yehezkel<sup>1</sup>, Omer Hofman<sup>2</sup>, Roman Vainshtein<sup>2</sup>, Hisashi Kojima<sup>3</sup>, Yuval Elovici<sup>1</sup>, Asaf Shabtai<sup>1</sup><br>
+        <small><sup>1</sup>Ben-Gurion University of the Negev, Israel | <sup>2</sup>Fujitsu Research of Europe | <sup>3</sup>Fujitsu Limited, Japan</small>
+      </p>
+    </div>
+    <div class="logos">
+      <img src="../Images/ICML_logo.png" alt="ICML Logo" class="icml-logo">
+    </div>
+  </header>
+
+  <!-- Navigation Bar -->
+  <nav class="sticky-nav">
+    <div class="nav-container">
+      <a href="#abstract" class="nav-btn">Abstract</a>
+      <a href="#contributions" class="nav-btn">Contributions</a>
+      <a href="#methodology" class="nav-btn">Methodology</a>
+      <a href="#results" class="nav-btn">Results</a>
+      <a href="#resources" class="nav-btn">Resources</a>
+    </div>
   </nav>
-  
+
+  <!-- Abstract Section -->
   <section id="abstract">
-    <div class="container">
+    <div class="card">
       <h2>Abstract</h2>
-      <p>Federated Learning (FL) enables collaborative training without exposing raw data, yet remains vulnerable to <strong>gradient inversion</strong> attacks that recover private inputs from shared gradients. We present <strong>GI-DQA</strong>, the <em>first</em> attack that successfully reconstructs sensitive <em>document question-answering</em> inputs by combining optimization-based image recovery with analytic extraction of question–answer pairs.</p>
+      <p>
+        Federated Learning enables training without exposing raw data but remains vulnerable to gradient inversion attacks. We introduce <strong>GI-DQA</strong>, a pioneering approach that reconstructs sensitive Document QA inputs, demonstrating critical vulnerabilities in multimodal models.
+      </p>
     </div>
   </section>
-  
+
+  <!-- Contributions Section -->
   <section id="contributions">
-    <div class="container">
-      <h2>Key Contributions</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>Novel Attack</h3>
-          <p>First gradient inversion attack targeting multimodal Document QA models.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Hybrid Strategy</h3>
-          <p>Visual pixel optimization + analytic question–answer reconstruction.</p>
-        </div>
-        <div class="feature-card">
-          <h3>Comprehensive Evaluation</h3>
-          <p>Tested on Donut-Base and LayoutLMv3-Base using the privacy-aware PFL-DocVQA dataset.</p>
-        </div>
+    <h2>Key Contributions</h2>
+    <div class="features-grid">
+      <div class="card">
+        <h3>Novel Attack</h3>
+        <p>First multimodal gradient inversion attack targeting Document QA models.</p>
+      </div>
+      <div class="card">
+        <h3>Hybrid Methodology</h3>
+        <p>Combines visual pixel optimization and analytical QA reconstruction.</p>
+      </div>
+      <div class="card">
+        <h3>Thorough Evaluation</h3>
+        <p>Validated against Donut and LayoutLMv3 using the privacy-aware PFL-DocVQA dataset.</p>
       </div>
     </div>
   </section>
-  
-  <section id="method">
-    <div class="container">
-      <h2>Method</h2>
-      <img src="img/architecture.png" alt="GI-DQA Architecture" style="max-width: 100%; border-radius: 1rem; margin: 2rem 0;">
-      <p>GI-DQA takes leaked gradients (∇θ), public document templates, and model weights as input. It extracts the exact question & answer tokens analytically, then optimizes document pixels to match client gradients while respecting visual priors.</p>
+
+  <!-- Methodology Section -->
+  <section id="methodology">
+    <h2>Methodology</h2>
+    <div class="card">
+      <p>GI-DQA leverages leaked gradients and public templates, analytically reconstructing QA tokens, then optimizing visual content to align with client gradients and visual priors.</p>
+      <img src="../Images/Methode.png" alt="Methodology Overview">
+    </div>
+    
+    <!-- Pipeline Section -->
+    <div class="pipeline-grid">
+      <div class="card">
+        <h3>Benign Client</h3>
+        <ul>
+          <li>Private document <strong>x<sub>D</sub></strong> + question <strong>x<sub>Q</sub></strong> → <em>DQA model</em></li>
+          <li>Model returns answer <strong>y</strong>, sends gradients <strong>∇θ<sub>client</sub></strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Attacker Setup</h3>
+        <ul>
+          <li>Starts from public template <strong>ẑ<sub>D</sub></strong></li>
+          <li>Analytically reconstructs discrete question <strong>x<sub>Q</sub></strong></li>
+          <li>Computes gradients <strong>∇θ<sub>adv</sub></strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Optimization Loop</h3>
+        <ul>
+          <li>Gradient-matching loss <strong>L<sub>grad</sub>(∇θ<sub>adv</sub>, ∇θ<sub>client</sub>)</strong></li>
+          <li>Adds priors for smoothness, layout preservation, sharp text edges</li>
+          <li>Iteratively updates template pixels until gradients align</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Outcome</h3>
+        <ul>
+          <li>Template morphs into high-fidelity replica, exposing private content</li>
+        </ul>
+      </div>
     </div>
   </section>
-  
+
+  <!-- Results Section -->
   <section id="results">
-    <div class="container">
-      <h2>Results</h2>
-      <div class="results-container">
-        <p>GI-DQA dramatically outperforms prior inversion methods on multimodal models.</p>
-        <img src="img/results.png" alt="Results Comparison" class="results-image">
-        <p>Recovered private fields (names, IDs) using GI-DQA vs. prior attacks.</p>
-      </div>
+    <h2>Results</h2>
+    <div class="card">
+      <p>Significantly outperforms existing inversion methods, recovering detailed personal data effectively.</p>
+      <img src="../Images/Main_Results.png" alt="Results Comparison">
     </div>
   </section>
-  
+
+  <!-- Resources Section -->
   <section id="resources">
-    <div class="container">
-      <h2>Resources</h2>
-      <div class="resources">
-        <a href="https://github.com/AlonZolfi/gi-dqa" class="resource-link" target="_blank">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          GitHub Repository
-        </a>
-        <a href="paper.pdf" class="resource-link" target="_blank">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 1v5h5v10H6V3h7z"/>
-          </svg>
-          Read the Paper
-        </a>
-        <a href="poster.pdf" class="resource-link" target="_blank">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
-            <path d="M7 12h10v2H7z"/>
-            <path d="M7 7h10v2H7z"/>
-            <path d="M7 17h7v2H7z"/>
-          </svg>
-          Download Poster
-        </a>
-      </div>
+    <h2>Resources</h2>
+    <div class="features-grid">
+      <a class="card resource-card" href="https://github.com/AlonZolfi/DQAGradientInversion">
+        <span class="resource-title">GitHub Repository</span>
+      </a>
+      <a class="card resource-card" href="https://drive.google.com/file/d/1HukkaTs8BXmqF-nnub44y9h6EBntO0ke/view">
+        <span class="resource-title">Read Paper</span>
+      </a>
+      <a class="card resource-card" href="https://drive.google.com/file/d/1_ME_zoaX4cn1plACpWiwmHUnCw24Gm-Q/view">
+        <span class="resource-title">Watch Video</span>
+      </a>
+      <a class="card resource-card" href="https://drive.google.com/file/d/1LVCrCqtTo7otC7Ea11YnDEieCql5-g89/view">
+        <span class="resource-title">View Poster</span>
+      </a>
     </div>
   </section>
-  
+
+  <!-- Footer Section -->
   <footer>
-    <div class="container">
-      <p>&copy; 2025 GI-DQA Team · <a href="mailto:omribenh@post.bgu.ac.il">omribenh@post.bgu.ac.il</a></p>
-    </div>
+    <p>&copy; 2025 Cyber Ben Gurion - Fujitsu | Contact us: <a href="mailto:omribenh@post.bgu.ac.il">omribenh@post.bgu.ac.il</a> | <a href="mailto:zolfi@post.bgu.ac.il">zolfi@post.bgu.ac.il</a></p>
   </footer>
+  <script>
+    // Highlight active section in navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      const navBtns = document.querySelectorAll('.nav-btn');
+      const footer = document.querySelector('footer');
+      
+      function highlightActiveSection() {
+        let scrollPosition = window.scrollY + 100; // Add offset for better detection
+        
+        // Check if we're near the footer (which means we should highlight Resources)
+        const footerTop = footer.offsetTop - 200; // Add some buffer
+        if (scrollPosition >= footerTop) {
+          navBtns.forEach(btn => btn.classList.remove('active'));
+          navBtns[navBtns.length - 1].classList.add('active'); // Highlight resources
+          return;
+        }
+        
+        // Check if we're at the bottom of the page
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+          navBtns.forEach(btn => btn.classList.remove('active'));
+          navBtns[navBtns.length - 1].classList.add('active'); // Highlight resources
+          return;
+        }
+        
+        // Normal section detection
+        sections.forEach((section, index) => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionBottom = sectionTop + section.offsetHeight;
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            navBtns[index].classList.add('active');
+          }
+        });
+      }
+      
+      // Set initial active state
+      highlightActiveSection();
+      
+      // Update on scroll
+      window.addEventListener('scroll', highlightActiveSection);
+      
+      // Smooth scrolling for navigation links
+      navBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetSection = document.querySelector(targetId);
+          
+          window.scrollTo({
+            top: targetSection.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+  </script>
+</body>
+    </div>
+  </section>
 </body>
 </html>
