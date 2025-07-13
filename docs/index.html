@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0066cc" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>GI-DQA – ICML 2025</title>
 
   <!-- Google Fonts -->
@@ -382,6 +385,132 @@
     section {
       scroll-margin-top: 80px; /* Adjust scroll position for section headers */
     }
+
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+      /* Header adjustments */
+      .header-container {
+        flex-direction: column;
+        padding: 15px 10px;
+      }
+      
+      .logos {
+        justify-content: center;
+        margin: 10px 0;
+      }
+      
+      .fujitsu-logo {
+        height: 80px; /* Slightly smaller on mobile */
+      }
+      
+      .icml-logo {
+        height: 50px; /* Smaller on mobile */
+      }
+      
+      .title-container {
+        padding: 10px 0;
+      }
+      
+      .title-container h1 {
+        font-size: 22px; /* Smaller title on mobile */
+      }
+      
+      .title-container p {
+        font-size: 13px; /* Smaller text on mobile */
+      }
+      
+      /* Navigation adjustments */
+      .nav-container {
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 10px;
+      }
+      
+      .nav-btn {
+        padding: 0.4rem 1rem;
+        margin: 0 0.3rem;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      
+      /* Section adjustments */
+      section {
+        padding: 1rem;
+        padding-top: 2rem;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
+      
+      .card {
+        padding: 1.5rem 1rem;
+      }
+      
+      /* Features grid adjustments */
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      /* Pipeline grid adjustments */
+      .pipeline-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      /* Resource cards adjustments */
+      #resources .features-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      }
+      
+      .resource-title {
+        font-size: 1.1rem;
+      }
+      
+      /* Footer adjustments */
+      footer {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+      
+      /* Image adjustments */
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+    /* Extra small devices */
+    @media (max-width: 480px) {
+      .title-container h1 {
+        font-size: 20px;
+      }
+      
+      .title-container p {
+        font-size: 12px;
+      }
+      
+      .fujitsu-logo {
+        height: 60px;
+      }
+      
+      .icml-logo {
+        height: 40px;
+      }
+      
+      .nav-btn {
+        padding: 0.3rem 0.8rem;
+        font-size: 13px;
+      }
+      
+      #resources .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .resource-title {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -522,28 +651,36 @@
       const sections = document.querySelectorAll('section');
       const navBtns = document.querySelectorAll('.nav-btn');
       const footer = document.querySelector('footer');
+      const nav = document.querySelector('.sticky-nav');
+      
+      // Function to check if device is mobile
+      function isMobile() {
+        return window.innerWidth <= 768;
+      }
       
       function highlightActiveSection() {
-        let scrollPosition = window.scrollY + 100; // Add offset for better detection
+        let scrollPosition = window.scrollY;
+        let offset = isMobile() ? 50 : 100; // Smaller offset on mobile
+        scrollPosition += offset;
         
-        // Check if we're near the footer (which means we should highlight Resources)
-        const footerTop = footer.offsetTop - 200; // Add some buffer
+        // Check if we're near the footer
+        const footerTop = footer.offsetTop - (isMobile() ? 100 : 200);
         if (scrollPosition >= footerTop) {
           navBtns.forEach(btn => btn.classList.remove('active'));
-          navBtns[navBtns.length - 1].classList.add('active'); // Highlight resources
+          navBtns[navBtns.length - 1].classList.add('active');
           return;
         }
         
         // Check if we're at the bottom of the page
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
           navBtns.forEach(btn => btn.classList.remove('active'));
-          navBtns[navBtns.length - 1].classList.add('active'); // Highlight resources
+          navBtns[navBtns.length - 1].classList.add('active');
           return;
         }
         
         // Normal section detection
         sections.forEach((section, index) => {
-          const sectionTop = section.offsetTop - 100;
+          const sectionTop = section.offsetTop - offset;
           const sectionBottom = sectionTop + section.offsetHeight;
           
           if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
@@ -567,11 +704,45 @@
           const targetSection = document.querySelector(targetId);
           
           window.scrollTo({
-            top: targetSection.offsetTop - 70,
+            top: targetSection.offsetTop - (isMobile() ? 50 : 70),
             behavior: 'smooth'
           });
         });
       });
+      
+      // Handle navigation overflow on mobile
+      if (isMobile()) {
+        // Center active nav item on mobile
+        function centerActiveNavItem() {
+          const activeBtn = document.querySelector('.nav-btn.active');
+          if (activeBtn) {
+            const navContainer = document.querySelector('.nav-container');
+            const activeBtnLeft = activeBtn.offsetLeft;
+            const activeBtnWidth = activeBtn.offsetWidth;
+            const navContainerWidth = navContainer.offsetWidth;
+            
+            navContainer.scrollLeft = activeBtnLeft - (navContainerWidth / 2) + (activeBtnWidth / 2);
+          }
+        }
+        
+        // Center active nav item when it changes
+        const navObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+              if (mutation.target.classList.contains('active')) {
+                centerActiveNavItem();
+              }
+            }
+          });
+        });
+        
+        navBtns.forEach(btn => {
+          navObserver.observe(btn, { attributes: true });
+        });
+        
+        // Initial centering
+        window.addEventListener('load', centerActiveNavItem);
+      }
     });
   </script>
 </body>
